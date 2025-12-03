@@ -1,0 +1,251 @@
+.flex {
+    display: flex;
+    gap: 20px;
+}
+.right {
+    justify-content: flex-end;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+.hero-con {
+    display: flex;
+    min-height: 50vh;
+}
+.hero-text {
+    flex: 1;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    padding: 40px;
+    border: 1px solid #000000;
+}
+
+.hero-flex {
+    display: flex;
+    gap: 8px;
+}
+.hero-found {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+.hero-text h1 {
+    font-family: "Lora", serif;
+    font-size: 6em;
+}
+.hero-text p {
+    padding: 1rem 0;
+}
+.hero-lost {
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.hero-con img {
+    max-width: 100px;
+    display: block;
+    mix-blend-mode: multiply;
+}
+
+button {
+    margin-top: 20px;
+    padding: 12px 20px;
+    background-color: white;
+    border: 1px solid #000000;
+    font-size: 1rem;
+    cursor: pointer;
+    /* align-self: end; */
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: 300ms;
+    font-family: "Lora", serif;
+}
+
+button:hover {
+    background-color: #000000;
+    color: white;
+    border-radius: 100px;
+    transform: scale(0.9);
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mih-h {
+    min-height: 100vh;
+}
+
+.item-form-con {
+    width: 100%;
+    max-width: 600px;
+    background: #ffffff;
+    padding: 32px;
+    box-shadow: 0 10px 30px rgba(20, 24, 50, 0.06);
+    border: 1px solid rgba(15, 23, 42, 1);
+}
+
+.item-form-con form p {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 16px;
+}
+
+.item-form-con form label {
+    margin-bottom: 8px;
+    font-family: "Lora", serif;
+    color: #333;
+}
+
+.item-form-con form input,
+.item-form-con form textarea {
+    padding: 10px 12px;
+    font-size: 1rem;
+    border: 1px solid #000000;
+    outline: none;
+    transition: box-shadow 150ms ease, border-color 150ms ease;
+}
+
+.report-item {
+    /* background-image: url("https://images.pexels.com/photos/7130555/pexels-photo-7130555.jpeg");
+    background-size: cover;
+    background-position: center; */
+}
+
+.first-title {
+    padding: 30px;
+}
+.first-title h2 {
+    font-family: "Lora", serif;
+    font-size: 7em;
+    margin-bottom: 20px;
+}
+
+.item-container {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    padding: 20px;
+}
+.item-img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+.item-img img {
+    border-radius: 8px;
+    max-width: 500px;
+    min-width: 500px;
+    aspect-ratio: 1/1;
+    height: auto;
+}
+.item-details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.item-details h1 {
+    font-family: "Lora", serif;
+    font-size: 4rem;
+    text-transform: capitalize;
+}
+
+.item-details p {
+    color: #333333a7;
+    max-width: 700px;
+}
+
+.cta {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    text-align: left;
+    justify-content: space-between;
+    background-color: #ff937e;
+    padding: 40px 40px;
+    margin: 40px 0;
+}
+.cta a {
+    display: block;
+}
+.cta button {
+    margin: 0;
+}
+
+@media (max-width: 1024px) {
+    .hero-text h1 {
+        font-family: "Lora", serif;
+        font-size: 4em;
+    }
+    .first-title h2 {
+        font-size: 4em;
+    }
+}
+
+@media (max-width: 800px) {
+    .cta {
+        padding: 20px 20px;
+    }
+    .hero-con {
+        flex-direction: column;
+    }
+    .hero-flex {
+        flex-direction: column;
+    }
+    .mobile-rev {
+        flex-direction: column-reverse;
+        align-items: end;
+    }
+    .hero-text h1 {
+        font-family: "Lora", serif;
+        font-size: 2em;
+    }
+
+    .hero-con img {
+        max-width: 80px;
+    }
+    .hero-con button {
+        align-self: center;
+    }
+
+    .item-form-con {
+        margin: 0;
+        padding: 10px;
+    }
+    .report-item {
+        flex-direction: column;
+    }
+    .first-title {
+        padding: 5px;
+    }
+    .first-title h2 {
+        font-size: 1.5em;
+        margin-top: 20px;
+    }
+    .first-title p {
+        font-size: 12px;
+        color: #000000b3;
+    }
+    .item-container {
+        flex-direction: column;
+        padding: 10px;
+    }
+    .item-img img {
+        max-width: 100%;
+        min-width: 100%;
+    }
+}
