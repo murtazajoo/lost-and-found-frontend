@@ -8,6 +8,29 @@ export default function Item() {
     const { id } = useParams();
     const [item, setItem] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [userId, setUserId] = useState(null);
+
+    const handleClaim = async () => {
+        const response = await fetch(
+            `${REACT_APP_BACKEND_URL}/item/${id}/claimed`,
+            {
+                method: "PUT",
+                credentials: "include",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            }
+        );
+        const data = await response.json();
+        if (response.ok) {
+            setItem((prevItem) => ({
+                ...prevItem,
+                claimed: true,
+            }));
+        } else {
+            console.error("Failed to mark item as claimed:", data);
+        }
+    };
 
     const navigate = useNavigate();
     useEffect(() => {
@@ -24,6 +47,24 @@ export default function Item() {
         }
         fetchItem();
     }, [id]);
+
+    useEffect(() => {
+        const fetchuser = async () => {
+            const response = await fetch(
+                `${REACT_APP_BACKEND_URL}/auth/status`,
+                {
+                    credentials: "include",
+                }
+            );
+            const data = await response.json();
+            if (response.ok) {
+                setUserId(data.userId);
+            } else {
+                navigate("/auth/login");
+            }
+        };
+        fetchuser();
+    }, []);
 
     if (loading) {
         return (
@@ -93,6 +134,31 @@ export default function Item() {
                             Contact via WhatsApp
                         </button>
                     </a>
+
+                    <div className="flex items-center ">
+                        {item.claimed ? (
+                            <p
+                                style={{
+                                    color: "green",
+                                    fontWeight: "bold",
+                                }}
+                            >
+                                {" "}
+                                Item has been claimed.
+                            </p>
+                        ) : (
+                            userId === item.userId._id && (
+                                <button
+                                    onClick={handleClaim}
+                                    style={{
+                                        margin: 0,
+                                    }}
+                                >
+                                    Mark as Claimed
+                                </button>
+                            )
+                        )}
+                    </div>
                 </div>
             </div>
         </>

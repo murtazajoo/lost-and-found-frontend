@@ -95,10 +95,10 @@ export default function ReportItem({ type }) {
                 }
             );
             const data = await response.json();
-            if (!response.ok) {
-                navigate("/auth/login");
-            } else {
+            if (response.ok) {
                 setLoading(false);
+            } else {
+                navigate("/auth/login");
             }
         };
         fetchuser();

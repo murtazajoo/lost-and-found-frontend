@@ -3,7 +3,7 @@ import { FaSearch } from "react-icons/fa";
 import ItemCard from "../components/ItemCard";
 import { REACT_APP_BACKEND_URL } from "../utils";
 
-export default function Items() {
+export default function Items({ home }) {
     const [filter, setFilter] = useState("lost");
     const [filteredItems, setFilteredItems] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -18,6 +18,10 @@ export default function Items() {
                 item.description.toLowerCase().includes(lowercasedTerm) ||
                 item.location.toLowerCase().includes(lowercasedTerm)
         );
+        if (home) {
+            setFilteredItems(filtered.slice(0, 4));
+            return;
+        }
         setFilteredItems(filtered);
     }, [searchTerm, items]);
 
@@ -30,6 +34,11 @@ export default function Items() {
             const data = await response.json();
             if (response.ok) {
                 setItems(data.items);
+                if (home) {
+                    setFilteredItems(data.items.slice(0, 4));
+                    setLoading(false);
+                    return;
+                }
                 setFilteredItems(data.items);
             } else {
                 console.error("Failed to fetch items:", data);
@@ -69,15 +78,18 @@ export default function Items() {
                         FOUND
                     </div>
                 </div>
-                <div className="search">
-                    <FaSearch />
-                    <input
-                        type="text"
-                        placeholder="Search items..."
-                        value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)}
-                    />
-                </div>
+
+                {!home && (
+                    <div className="search">
+                        <FaSearch />
+                        <input
+                            type="text"
+                            placeholder="Search items..."
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                        />
+                    </div>
+                )}
             </div>
             <div className="items-list">
                 {loading && (

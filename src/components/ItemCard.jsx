@@ -9,6 +9,19 @@ export default function ItemCard({ item }) {
             }}
         >
             <img src={item.imageUrl} alt={item.itemName} />
+            <div
+                style={{
+                    border: "1px solid " + (item.claimed ? "green" : "red"),
+                    color: item.claimed ? "green" : "red",
+                    width: "fit-content",
+                    padding: "2px 8px",
+                    borderRadius: "5px",
+                    marginBottom: "10px",
+                    fontSize: "12px",
+                }}
+            >
+                {item.claimed ? "Claimed" : "Not Claimed"}
+            </div>
             <div>
                 <h2 className="lora-400">{item.itemName}</h2>
                 <p className="line-clamp">{item.description}</p>
