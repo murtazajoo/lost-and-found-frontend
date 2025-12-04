@@ -60,7 +60,6 @@ export default function Item() {
             if (response.ok) {
                 setUserId(data.userId);
             } else {
-                navigate("/auth/login");
             }
         };
         fetchuser();
