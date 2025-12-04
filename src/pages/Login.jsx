@@ -24,7 +24,6 @@ export default function Login() {
         const response = await fetch(`${REACT_APP_BACKEND_URL}/auth/login`, {
             method: "POST",
             credentials: "include",
-            withCredentials: true,
             headers: {
                 "Content-Type": "application/json",
             },
