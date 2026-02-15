@@ -7,6 +7,7 @@ import Items from "./pages/Items";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import ReportItem from "./pages/ReportItem";
+import Test from "./pages/Test";
 import './styles/App.css';
 import './styles/item.css';
 import './styles/nav.css';
@@ -26,6 +27,8 @@ function App() {
         <Route path="/items" element={<Items />} />
         <Route path="/item/:id" element={<Item />} />
         <Route path="/about" element={<About />} />
+        <Route path="/test" element={<Test />} />
+
 
 
       </Routes>

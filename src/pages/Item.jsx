@@ -19,7 +19,7 @@ export default function Item() {
                 headers: {
                     "Content-Type": "application/json",
                 },
-            }
+            },
         );
         const data = await response.json();
         if (response.ok) {
@@ -54,7 +54,7 @@ export default function Item() {
                 `${REACT_APP_BACKEND_URL}/auth/status`,
                 {
                     credentials: "include",
-                }
+                },
             );
             const data = await response.json();
             if (response.ok) {
@@ -117,6 +117,7 @@ export default function Item() {
                     >
                         {item.description}
                     </p>
+                    <p>Owner ID: {item.userId._id}</p>
                     <p>Date: {new Date(item.date).toDateString()}</p>
                     <p>Location: {item.location}</p>
                     {item.email && <p>Email: {item.email}</p>}
