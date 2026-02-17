@@ -1,19 +1,22 @@
-import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Toaster } from 'react-hot-toast';
 import { BrowserRouter } from "react-router";
 import App from './App';
+import UserContextProvider from './context/userContext';
 import reportWebVitals from './reportWebVitals';
 import "./styles/index.css";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <BrowserRouter>
+  // <React.StrictMode>
+
+  <BrowserRouter>
+    <UserContextProvider>
       <App />
       <Toaster />
-    </BrowserRouter>
-  </React.StrictMode>
+    </UserContextProvider>
+  </BrowserRouter>
+  // </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function

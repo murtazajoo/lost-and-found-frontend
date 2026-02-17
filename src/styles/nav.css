@@ -8,6 +8,7 @@
     border-bottom: 1px solid #000;
     position: relative;
     z-index: 20;
+    /* background: orangered; */
 }
 
 .brand {
@@ -76,11 +77,13 @@
         overflow: hidden;
         max-height: 0;
         transition: max-height 0.3s ease;
-        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+        box-shadow: 0px 160px 180px rgba(0, 0, 0, 0.4);
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
     }
 
     .nav-wrapper.open {
-        max-height: 240px; /* enough for a few links */
+        max-height: 300px; /* enough for a few links */
     }
 
     .nav-links {

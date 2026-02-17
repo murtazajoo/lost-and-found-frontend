@@ -11,7 +11,8 @@
 .login-card {
     width: 100%;
     max-width: 420px;
-    background: #ffffff;
+    /* background: #ffffff; */
+
     padding: 32px;
     box-shadow: 0 10px 30px rgba(20, 24, 50, 0.06);
     border: 1px solid rgba(15, 23, 42, 1);
@@ -38,7 +39,9 @@
     font-size: 1rem;
     border: 1px solid #000000;
     outline: none;
-    transition: box-shadow 150ms ease, border-color 150ms ease;
+    transition:
+        box-shadow 150ms ease,
+        border-color 150ms ease;
 }
 
 .login-input::placeholder {

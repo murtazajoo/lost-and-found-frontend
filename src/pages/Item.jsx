@@ -1,14 +1,17 @@
+import { motion } from "motion/react";
 import { useEffect, useState } from "react";
 import { FaWhatsapp } from "react-icons/fa";
 import { IoIosArrowRoundBack } from "react-icons/io";
-import { useNavigate, useParams } from "react-router";
+import { LuMessageCircleMore } from "react-icons/lu";
+import { NavLink, useNavigate, useParams } from "react-router";
+import { useUser } from "../context/userContext";
 import { REACT_APP_BACKEND_URL } from "../utils";
 
 export default function Item() {
     const { id } = useParams();
     const [item, setItem] = useState(null);
     const [loading, setLoading] = useState(true);
-    const [userId, setUserId] = useState(null);
+    const { user } = useUser();
 
     const handleClaim = async () => {
         const response = await fetch(
@@ -19,7 +22,7 @@ export default function Item() {
                 headers: {
                     "Content-Type": "application/json",
                 },
-            }
+            },
         );
         const data = await response.json();
         if (response.ok) {
@@ -48,23 +51,6 @@ export default function Item() {
         fetchItem();
     }, [id]);
 
-    useEffect(() => {
-        const fetchuser = async () => {
-            const response = await fetch(
-                `${REACT_APP_BACKEND_URL}/auth/status`,
-                {
-                    credentials: "include",
-                }
-            );
-            const data = await response.json();
-            if (response.ok) {
-                setUserId(data.userId);
-            } else {
-            }
-        };
-        fetchuser();
-    }, []);
-
     if (loading) {
         return (
             <p style={{ textAlign: "center", fontSize: "2rem" }}>Loading...</p>
@@ -80,7 +66,15 @@ export default function Item() {
     }
 
     return (
-        <>
+        <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{
+                opacity: 1,
+                scale: 1,
+                transition: { duration: 0.5, delay: 1 },
+            }}
+            exit={{ opacity: 0 }}
+        >
             <button
                 className="go-back-button"
                 onClick={() => navigate("/items")}
@@ -117,22 +111,36 @@ export default function Item() {
                     >
                         {item.description}
                     </p>
+                    <p>Owner ID: {item.userId._id}</p>
                     <p>Date: {new Date(item.date).toDateString()}</p>
                     <p>Location: {item.location}</p>
                     {item.email && <p>Email: {item.email}</p>}
-                    <a
-                        href={`https://wa.me/${item.whatsAppNumber}?text=Hello%20I%20am%20contacting%20you%20regarding%20the%20${item.itemName}%20you%20reported%20as%20${item.type}.`}
-                        target="_blank"
-                        rel="noreferrer"
-                        style={{
-                            width: "fit-content",
-                        }}
-                    >
-                        <button>
-                            <FaWhatsapp color="green" size={30} />
-                            Contact via WhatsApp
-                        </button>
-                    </a>
+                    {item && item.whatsAppNumber && (
+                        <a
+                            href={`https://wa.me/${item.whatsAppNumber}?text=Hello%20I%20am%20contacting%20you%20regarding%20the%20${item.itemName}%20you%20reported%20as%20${item.type}.`}
+                            target="_blank"
+                            rel="noreferrer"
+                            style={{
+                                width: "fit-content",
+                            }}
+                        >
+                            <button>
+                                <FaWhatsapp color="green" size={30} />
+                                Contact via WhatsApp
+                            </button>
+                        </a>
+                    )}
+                    {user && user._id !== item.userId._id && (
+                        <NavLink
+                            to={`/chat/${item._id}`}
+                            state={{ item, receiver: item.userId }}
+                        >
+                            <button>
+                                <LuMessageCircleMore />
+                                Chat with Owner
+                            </button>
+                        </NavLink>
+                    )}
 
                     <div className="flex items-center ">
                         {item.claimed ? (
@@ -146,7 +154,8 @@ export default function Item() {
                                 Item has been claimed.
                             </p>
                         ) : (
-                            userId === item.userId._id && (
+                            user &&
+                            user._id === item.userId._id && (
                                 <button
                                     onClick={handleClaim}
                                     style={{
@@ -160,6 +169,6 @@ export default function Item() {
                     </div>
                 </div>
             </div>
-        </>
+        </motion.div>
     );
 }

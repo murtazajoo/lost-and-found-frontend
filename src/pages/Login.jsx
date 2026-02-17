@@ -2,6 +2,7 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { IoIosArrowRoundForward } from "react-icons/io";
 import { useNavigate } from "react-router";
+import { useUser } from "../context/userContext";
 import "../styles/Login.css";
 import { REACT_APP_BACKEND_URL } from "../utils";
 
@@ -9,6 +10,7 @@ export default function Login() {
     const [formData, setFormData] = useState({});
     const navigate = useNavigate();
     const [loggingIn, setLoggingIn] = useState(false);
+    const { updateUser } = useUser();
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -31,7 +33,7 @@ export default function Login() {
         });
         const data = await response.json();
         if (response.ok) {
-            console.log("Login successful:", data);
+            updateUser(data);
             toast.success("Login successful!");
             navigate("/");
         } else {

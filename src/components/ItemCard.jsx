@@ -1,8 +1,12 @@
+import { motion } from "motion/react";
 import { IoIosArrowRoundForward } from "react-icons/io";
 
 export default function ItemCard({ item }) {
     return (
-        <div
+        <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5 }}
             className="item-card"
             style={{
                 borderColor: item.type === "lost" ? "#571414ff " : "green",
@@ -32,6 +36,6 @@ export default function ItemCard({ item }) {
                     </button>
                 </a>
             </div>
-        </div>
+        </motion.div>
     );
 }
