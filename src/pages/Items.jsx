@@ -16,7 +16,7 @@ export default function Items({ home }) {
             (item) =>
                 item.itemName.toLowerCase().includes(lowercasedTerm) ||
                 item.description.toLowerCase().includes(lowercasedTerm) ||
-                item.location.toLowerCase().includes(lowercasedTerm)
+                item.location.toLowerCase().includes(lowercasedTerm),
         );
         if (home) {
             setFilteredItems(filtered.slice(0, 4));
@@ -29,7 +29,7 @@ export default function Items({ home }) {
         async function fetchItems() {
             setLoading(true);
             const response = await fetch(
-                `${REACT_APP_BACKEND_URL}/item/${filter}`
+                `${REACT_APP_BACKEND_URL}/item/${filter}`,
             );
             const data = await response.json();
             if (response.ok) {

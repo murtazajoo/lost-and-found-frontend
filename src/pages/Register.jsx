@@ -52,7 +52,7 @@ export default function Register() {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({ email: formData.email, otp: otp }),
-            }
+            },
         );
         const data = await response.json();
         if (response.ok) {
@@ -95,7 +95,6 @@ export default function Register() {
         const data = await response.json();
         if (response.ok) {
             // Registration successful
-            console.log("Registration successful:", data);
             toast.success("Registration successful! Please log in.");
             navigate("/auth/login");
         } else {

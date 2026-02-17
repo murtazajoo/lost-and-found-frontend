@@ -2,15 +2,19 @@ import ReactDOM from 'react-dom/client';
 import { Toaster } from 'react-hot-toast';
 import { BrowserRouter } from "react-router";
 import App from './App';
+import UserContextProvider from './context/userContext';
 import reportWebVitals from './reportWebVitals';
 import "./styles/index.css";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   // <React.StrictMode>
+
   <BrowserRouter>
-    <App />
-    <Toaster />
+    <UserContextProvider>
+      <App />
+      <Toaster />
+    </UserContextProvider>
   </BrowserRouter>
   // </React.StrictMode>
 );

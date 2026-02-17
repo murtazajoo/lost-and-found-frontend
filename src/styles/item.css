@@ -48,7 +48,8 @@
     display: flex;
     flex-direction: column;
     padding: 20px;
-    gap: 20px;
+    gap: 5px;
+    aspect-ratio: 1/1;
     max-width: 300px;
     width: 100%;
 }
@@ -61,7 +62,8 @@
 .item-card p {
     font-size: 0.9rem;
     color: #333333a7;
-    min-height: 45px;
+
+    /* min-height: 45px; */
 }
 .item-card h2 {
     font-family: "Lora", serif;
@@ -115,7 +117,6 @@
         gap: 30px;
     }
     .item-card {
-        max-width: 100%;
         margin: auto;
     }
 }

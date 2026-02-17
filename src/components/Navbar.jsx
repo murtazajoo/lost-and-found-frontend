@@ -2,9 +2,11 @@ import { useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { RxCross1 } from "react-icons/rx";
 import { NavLink } from "react-router";
+import { useUser } from "../context/userContext";
 
 export default function Navbar() {
     const [open, setOpen] = useState(false);
+    const { user, updateUser, loading, error } = useUser();
 
     return (
         <nav className="navbar lora-400">
@@ -32,6 +34,17 @@ export default function Navbar() {
                             Home
                         </NavLink>
                     </li>
+                    {user && (
+                        <li role="none">
+                            <NavLink
+                                to="/inbox"
+                                onClick={() => setOpen(false)}
+                                role="menuitem"
+                            >
+                                Inbox
+                            </NavLink>
+                        </li>
+                    )}
                     <li role="none">
                         <NavLink
                             to="/items"
@@ -49,6 +62,25 @@ export default function Navbar() {
                         >
                             About
                         </NavLink>
+                    </li>
+                    <li role="none">
+                        {!loading && !user ? (
+                            <NavLink
+                                to="/auth/login"
+                                onClick={() => setOpen(false)}
+                                role="menuitem"
+                            >
+                                login
+                            </NavLink>
+                        ) : (
+                            <NavLink
+                                to="/me"
+                                onClick={() => setOpen(false)}
+                                role="menuitem"
+                            >
+                                My Profile
+                            </NavLink>
+                        )}
                     </li>
                 </ul>
             </div>

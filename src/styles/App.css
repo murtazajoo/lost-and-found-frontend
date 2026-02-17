@@ -115,7 +115,9 @@ button:hover {
     font-size: 1rem;
     border: 1px solid #000000;
     outline: none;
-    transition: box-shadow 150ms ease, border-color 150ms ease;
+    transition:
+        box-shadow 150ms ease,
+        border-color 150ms ease;
 }
 
 .report-item {
@@ -176,8 +178,10 @@ button:hover {
     text-align: left;
     justify-content: space-between;
     background-color: #ff7ef496;
+    /* background: orangered; */
+
     padding: 40px 40px;
-    margin: 40px 0;
+    /* margin: 40px 0; */
 }
 .cta a {
     display: block;
@@ -277,4 +281,20 @@ button:hover {
     color: #555;
     font-size: 14px;
     line-height: 1.5;
+}
+
+.toast-container {
+    display: flex;
+    padding: 5px;
+    background-color: white;
+    color: orangered;
+    border-radius: 8px;
+    font-size: 0.9rem;
+}
+
+.toast-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
 }

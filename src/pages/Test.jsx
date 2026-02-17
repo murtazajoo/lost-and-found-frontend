@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import { io } from "socket.io-client";
-import { REACT_APP_BACKEND_URL } from "../utils";
+import { useUser } from "../context/userContext";
+import useSocket from "../hook/useSocket";
 
 export default function Test() {
     const [msg, setMsg] = useState("");
@@ -8,55 +8,30 @@ export default function Test() {
     const [userId, setUserId] = useState(null);
     const ioRef = useRef(null);
     const [messages, setMessages] = useState([]);
+    const { user } = useUser();
+    const { sendMessage, subscribeToRoom } = useSocket();
 
     useEffect(() => {
-        ioRef.current = io(REACT_APP_BACKEND_URL);
-        const user = async () => {
-            const response = await fetch(
-                `${REACT_APP_BACKEND_URL}/auth/status`,
-                {
-                    credentials: "include",
-                },
-            );
-            const data = await response.json();
-            if (response.ok) {
-                setUserId(data.userId);
-            } else {
-                console.error("Failed to fetch user status:", data);
-            }
-        };
-        user();
-    }, []);
-
-    useEffect(() => {
-        if (ioRef.current) {
-            const socket = ioRef.current;
-            if (!r) return;
-            socket.emit("joinRoom", r);
-
-            socket.on("receive_message", (data) => {
-                setMessages((prev) => [...prev, data]);
-            });
-        }
-    }, [ioRef.current, r]);
+        if (!r) return;
+        subscribeToRoom(r, (data) => {
+            setMessages((prev) => [...prev, data]);
+        });
+    }, [r]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (ioRef.current) {
-            ioRef.current.emit("send_message", {
-                message: msg,
-                userId,
-                room: r,
-            });
+        if (msg && r) {
+            sendMessage(msg, r, user.userId, "6990a568eb905e32bd67f324");
             setMsg("");
         }
     };
     return (
         <div>
+            {JSON.stringify(user)}
             <div>
                 {messages.map((m, i) => (
                     <div key={i}>
-                        {m.message}, {m.userId}
+                        {m.content}, {m.sender}, {m.receiver}
                     </div>
                 ))}
             </div>

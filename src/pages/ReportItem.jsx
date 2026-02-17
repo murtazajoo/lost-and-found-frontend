@@ -2,9 +2,11 @@ import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { IoIosArrowRoundForward } from "react-icons/io";
 import { useNavigate } from "react-router";
+import { useUser } from "../context/userContext";
 import { REACT_APP_BACKEND_URL } from "../utils";
 
 export default function ReportItem({ type }) {
+    const { user, loading } = useUser();
     const init = {
         itemName: "",
         description: "",
@@ -13,10 +15,10 @@ export default function ReportItem({ type }) {
         whatsAppNumber: "",
         email: "",
     };
+
     const [itemData, setItemData] = useState(init);
     const navigate = useNavigate();
     const [submitting, setSubmitting] = useState(false);
-    const [loading, setLoading] = useState(true);
     const [file, setFile] = useState(null);
 
     const handleInputChange = (e) => {
@@ -52,7 +54,7 @@ export default function ReportItem({ type }) {
             {
                 method: "POST",
                 body: uploadImage(),
-            }
+            },
         );
 
         const d = await res.json();
@@ -75,7 +77,6 @@ export default function ReportItem({ type }) {
         });
         const data = await response.json();
         if (response.ok) {
-            console.log("Report submitted successfully:", data);
             toast.success("Report submitted successfully!");
             setItemData(init);
             navigate("/item/" + data.item._id);
@@ -87,22 +88,10 @@ export default function ReportItem({ type }) {
     };
 
     useEffect(() => {
-        const fetchuser = async () => {
-            const response = await fetch(
-                `${REACT_APP_BACKEND_URL}/auth/status`,
-                {
-                    credentials: "include",
-                }
-            );
-            const data = await response.json();
-            if (response.ok) {
-                setLoading(false);
-            } else {
-                navigate("/auth/login");
-            }
-        };
-        fetchuser();
-    }, []);
+        if (!user && !loading) {
+            navigate("/auth/login");
+        }
+    }, [user, loading, navigate]);
 
     if (loading) {
         return <div className="flex mih-h report-item">Loading...</div>;
@@ -207,7 +196,7 @@ export default function ReportItem({ type }) {
                         />
                     </p>
                     <p>
-                        <label htmlFor="whatsapp">WhatsApp</label>
+                        <label htmlFor="whatsapp">WhatsApp (optional)</label>
                         <input
                             type="text"
                             id="whatsapp"
@@ -215,12 +204,11 @@ export default function ReportItem({ type }) {
                             name="whatsAppNumber"
                             onChange={handleInputChange}
                             value={itemData.whatsAppNumber}
-                            required
                         />
                     </p>
 
                     <p>
-                        <label htmlFor="email"> Email</label>
+                        <label htmlFor="email"> Email (optional)</label>
                         <input
                             type="email"
                             id="email"

@@ -11,7 +11,6 @@ export default function Home() {
         async function fetchData() {
             const response = await fetch(REACT_APP_BACKEND_URL);
             const data = await response.json();
-            console.log(data);
         }
         fetchData();
     }, []);

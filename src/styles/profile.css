@@ -1,0 +1,90 @@
+.profile-page {
+    max-width: 600px;
+    margin: auto;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    height: 90vh;
+    padding: 10px;
+}
+/* profile-info""profile-title" */
+
+.profile-title {
+    margin-bottom: 20px;
+    display: flex;
+}
+
+.profile-title h1 {
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+.profile-info {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 10px;
+    background-color: #f9f9f9;
+}
+
+.profile-info p {
+    color: #333333a7;
+    max-width: 700px;
+}
+
+.profile-page button {
+    border: 1px solid #f80000;
+}
+
+.profile-page button:hover {
+    background-color: #f80000;
+    color: #fff;
+    border: 1px solid transparent;
+    box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.08);
+}
+
+/* page-items-listprofile-items-section */
+
+.profile-items-section {
+    margin-top: 30px;
+}
+
+.profile-items-section h2 {
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+.profile-items-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.profile-item-card {
+    padding: 10px;
+    border: 1px solid #333;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    transition: all 0.25s ease;
+}
+.profile-item-card:hover {
+    background-color: #dfdfdf;
+    border: 1px solid transparent;
+    box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.08);
+}
+.profile-item-name {
+    font-weight: 500;
+}
+.profile-item-status {
+    font-size: 0.7rem;
+    color: #333333b4;
+}
+
+.profile-item-image {
+    max-width: 100%;
+    width: 50px;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    height: auto;
+    margin-bottom: 10px;
+}
