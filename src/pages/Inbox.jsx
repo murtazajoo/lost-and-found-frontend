@@ -31,66 +31,81 @@ export default function Inbox() {
     return (
         <div
             style={{
-                maxWidth: "800px",
-                margin: "auto ",
-                padding: "20px",
+                background: "#ffc1aaad",
+                minHeight: "calc(100svh - 60px)",
             }}
         >
-            <h1>Inbox</h1>
-            {chats.length === 0 ? (
-                <p>No chats yet.</p>
-            ) : (
-                <ul
-                    style={{
-                        margin: "20px 0 0 0px ",
-                    }}
-                >
-                    {user &&
-                        chats.map((chat) => (
-                            <li key={chat._id} className="inbox-item">
-                                {activeUsers.includes(
-                                    chat.members.find(
-                                        (m) => m._id !== user.userId,
-                                    )._id,
-                                ) && <span className="active-indicator"></span>}
+            <div
+                style={{
+                    padding: "20px",
+                    margin: "auto ",
 
-                                {chat.unreadBy &&
-                                    chat.unreadBy.includes(user.userId) && (
-                                        <span className="unread-indicator"></span>
-                                    )}
-                                <NavLink
-                                    to={`/chat/${chat.itemId._id}`}
-                                    // state={{
-                                    //     receiver: {
-                                    //         _id: chat.members.find(
-                                    //             (m) => m._id !== user.userId,
-                                    //         )._id,
-                                    //     },
-                                    //     item: chat.itemId,
-                                    // }}
-                                >
-                                    Chat with{" "}
-                                    {
+                    maxWidth: "800px",
+                }}
+            >
+                <h1>Inbox</h1>
+                {chats.length === 0 ? (
+                    <p>No chats yet.</p>
+                ) : (
+                    <ul
+                        style={{
+                            margin: "20px 0 0 0px ",
+                        }}
+                    >
+                        {user &&
+                            chats.map((chat) => (
+                                <li key={chat._id} className="inbox-item">
+                                    {activeUsers.includes(
                                         chat.members.find(
                                             (m) => m._id !== user.userId,
-                                        ).name
-                                    }
-                                    <br />
-                                    <span
-                                        style={{
-                                            fontSize: "14px",
-                                            opacity: "0.6",
-                                        }}
+                                        )._id,
+                                    ) && (
+                                        <span className="active-indicator"></span>
+                                    )}
+
+                                    {chat.unreadBy &&
+                                        chat.unreadBy.includes(user.userId) && (
+                                            <span className="unread-indicator"></span>
+                                        )}
+                                    <NavLink
+                                        to={`/chat/${chat.itemId._id}/${
+                                            chat.members.find(
+                                                (m) => m._id !== user.userId,
+                                            )._id
+                                        }`}
+                                        className={"inbox-item-link"}
                                     >
-                                        Item:
-                                        {chat.itemId &&
-                                            ` (${chat.itemId.itemName})`}
-                                    </span>
-                                </NavLink>
-                            </li>
-                        ))}
-                </ul>
-            )}
+                                        <img
+                                            src={
+                                                chat.itemId.imageUrl ||
+                                                "/default-image.png"
+                                            }
+                                            alt=""
+                                        />
+                                        <div>
+                                            {
+                                                chat.members.find(
+                                                    (m) =>
+                                                        m._id !== user.userId,
+                                                ).name
+                                            }
+                                            <br />
+                                            <span
+                                                style={{
+                                                    fontSize: "14px",
+                                                    opacity: "0.6",
+                                                }}
+                                            >
+                                                {chat.itemId &&
+                                                    ` (${chat.itemId.itemName})`}
+                                            </span>
+                                        </div>
+                                    </NavLink>
+                                </li>
+                            ))}
+                    </ul>
+                )}
+            </div>
         </div>
     );
 }

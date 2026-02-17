@@ -1,5 +1,4 @@
 .inbox-item {
-    border: 1px solid #ccc;
     border-radius: 5px;
     padding: 10px;
     margin-bottom: 10px;
@@ -10,7 +9,24 @@ ul {
     list-style-type: none;
     padding: 0;
 }
+.inbox-item-link {
+    display: flex;
+    padding: 10px;
+    transition: background-color 0.5s ease;
+}
 
+.inbox-item-link:hover {
+    background-color: #ffb27477;
+}
+
+.inbox-item-link img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 100px;
+    border: 1px solid #333;
+    margin-right: 10px;
+}
 /* chat-container - Main wrapper
 chat-header - Header with recipient name
 messages-container - Messages list wrapper
@@ -27,16 +43,25 @@ send-button - Submit button */
     border-radius: 5px;
     display: flex;
     flex-direction: column;
-    height: 90vh;
+    height: calc(98svh - 60px);
     padding: 10px;
 }
 
 .chat-header {
     margin-bottom: 20px;
     display: flex;
+    align-items: center;
+}
+.chat-header img {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 100px;
+    border: 1px solid #333;
+    margin-right: 10px;
 }
 .chat-header p {
-    font-size: 1.5rem;
+    font-size: 1rem;
     font-weight: 500;
 }
 .chat-header span {
@@ -63,7 +88,7 @@ send-button - Submit button */
     display: flex;
     flex-direction: column;
     overflow-y: auto;
-    height: 90vh;
+    height: calc(98svh - 60px);
     padding: 10px;
     border-top: 1px solid #f80000;
     background-color: #f9f9f9;

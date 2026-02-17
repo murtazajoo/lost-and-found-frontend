@@ -8,7 +8,7 @@ import useSocket from "../hook/useSocket";
 import "./../styles/chat.css";
 
 export default function Chat() {
-    const { itemId } = useParams();
+    const { itemId, receiverId } = useParams();
     const location = useLocation();
 
     const [msg, setMsg] = useState("");
@@ -34,7 +34,7 @@ export default function Chat() {
                     `/chat/rooms`,
                     {
                         name: `chat_${itemId}`,
-                        members: [location.state?.receiver._id],
+                        members: [receiverId],
                         itemId,
                     },
                     {
@@ -111,6 +111,10 @@ export default function Chat() {
                 <NavLink to={`/inbox`} className="back-link">
                     <IoMdArrowBack />
                 </NavLink>
+                <img
+                    src={room.itemId?.imageUrl || "/default-image.png"}
+                    alt=""
+                />
                 <p>
                     {room.members?.find((m) => m._id !== user?.userId)?.name}
                     <span>

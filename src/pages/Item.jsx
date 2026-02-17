@@ -132,7 +132,7 @@ export default function Item() {
                     )}
                     {user && user._id !== item.userId._id && (
                         <NavLink
-                            to={`/chat/${item._id}`}
+                            to={`/chat/${item._id}/${item.userId._id}`}
                             state={{ item, receiver: item.userId }}
                         >
                             <button>
