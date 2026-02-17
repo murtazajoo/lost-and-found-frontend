@@ -9,7 +9,7 @@ const blackBox = {
         height: 0,
         top: "-100vh",
         transition: {
-            duration: 1.3,
+            duration: 1.5,
             ease: [0.87, 0, 0.13, 1],
         },
     },
@@ -35,7 +35,7 @@ const text = {
         y: 80,
         transition: {
             duration: 0.73,
-            ease: [0.87, 0, 0.13, 1],
+            ease: [0.87, 0, 0.13, 0.55],
         },
     },
 };
@@ -60,7 +60,7 @@ const InitialTransition = () => {
                 zIndex: 500,
                 inset: 0,
                 width: "100%",
-                background: "black",
+                background: "#ff8254",
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
@@ -98,7 +98,7 @@ const InitialTransition = () => {
                         style={{
                             width: "100%",
                             height: "100%",
-                            color: "pink",
+                            color: "black",
                             fill: "currentColor",
                         }}
                     />

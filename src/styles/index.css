@@ -8,6 +8,7 @@ body {
     -moz-osx-font-smoothing: grayscale;
     font-family: "Poppins", sans-serif;
     position: relative;
+    background-color: #ffe1d6ad;
 }
 * {
     box-sizing: border-box;

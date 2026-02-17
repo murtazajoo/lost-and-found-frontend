@@ -52,10 +52,10 @@ export default function Profile() {
     return (
         <div className="profile-page">
             <h1 className="profile-title">My Profile</h1>
-            <button onClick={logout}>Logout</button>
             <p className="profile-info">Name: {user.name}</p>
             <p className="profile-info">Email: {user.email}</p>
             <p className="profile-info">Items: {myItems.length}</p>
+            <button onClick={logout}>Logout</button>
             <div className="profile-items-section">
                 <h2 className="profile-subtitle">My Reported Items</h2>
                 {myItems.length === 0 ? (

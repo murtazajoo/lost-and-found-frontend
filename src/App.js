@@ -61,7 +61,7 @@ function App() {
           <Route path="/items" element={<ExitWrapper ><Items /></ExitWrapper>} />
           <Route path="/me" element={<ExitWrapper ><Profile /></ExitWrapper>} />
           <Route path="/inbox" element={<ExitWrapper ><Inbox /></ExitWrapper>} />
-          <Route path="/chat/:itemId" element={<ExitWrapper ><Chat /></ExitWrapper>} />
+          <Route path="/chat/:itemId/:receiverId" element={<ExitWrapper ><Chat /></ExitWrapper>} />
           <Route path="/item/:id" element={<ExitWrapper ><Item /></ExitWrapper>} />
           <Route path="/about" element={<ExitWrapper ><About /></ExitWrapper>} />
           <Route path="/test" element={<ExitWrapper ><Test /></ExitWrapper>} />
